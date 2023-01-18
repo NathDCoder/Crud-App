@@ -1,33 +1,20 @@
 import express from 'express';
 
+import { createUser, getUsers, getUser, deleteUser, updateUser } from '../controllers/users2.js';
+
+
 const router = express.Router();
 
-const users = [
-    {
-        firstName: "Amadi",
-        lastName: "Nwosu",
-        age: 32
-    },
-    {
-        firstName: "Dabarechi",
-        lastName: "Njoku",
-        age: 25
-    }      
-]
 
-//All routes start with slash users already
-router.get('/', (req, res) => {
-    console.log(users)
-    res.send(users);
-});
+//All routes start with slash users by default
+router.get('/', getUsers)
 
-router.post('/', (req, res) => {
+router.post('/', createUser);
 
-    const user = (req.body);
+router.get ('/:id', getUser);
 
-    users.push(user);
+router.delete ('/:id', deleteUser);
 
-    res.send(`Username with the name ${user.firstName} added to the database.`);
-});
+router.patch('/:id', updateUser);
 
 export default router;
